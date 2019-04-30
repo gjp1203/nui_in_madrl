@@ -68,14 +68,11 @@ class Temperature:
         '''
         Called to train hash key network
         '''
-	s_t, _, _, _, _, _, _, _, _ = self._replay_memory.getUnzippedSamples()
-        optDict = {self._net.inputs: s_t,
-                   self._net.dropout: 1.0}
+	o_t, _, _, _, _, _, _, _, _ = self._replay_memory.getUnzippedSamples()
+        if self.c.cnn.format == "NHWC":
+            o_t = np.moveaxis(o_t, 1, -1)
+        optDict = {self._net.inputs: o_t}
         _, outputs, loss = self._sess.run([self._net.optim, self._net.outputs, self._net.ae_loss], optDict)
-        if self._time%1000 == 0:
-            print(loss)
-            self.saveStateImage(s_t[0], name="real.jpg")
-            self.saveStateImage(outputs[0], name="ae.jpg")
 
     def saveStateImage(self, img, name='outfile.jpg', r=8):
         '''
@@ -95,6 +92,9 @@ class Temperature:
         :param tensor s_t: state for which key needs to be obtained
         :return int: Hash key for state
         '''
+
+        if self.c.cnn.format == "NHWC":
+            s_t = np.moveaxis([s_t], 0, -1)
         if self.c.leniency.hashing == 'AutoEncoder':
             self._time += 1
             if self._time%4 == 0 and self._replay_memory.getSize() > 100:

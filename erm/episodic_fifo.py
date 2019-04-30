@@ -21,7 +21,8 @@ class EPISODIC_FIFO(object):
         self._size = c.erm.size
         self._num_transitions_stored = 0
         self._learning_threshold = c.erm.threshold
-        
+        self.__config = c
+
     def getSize(self):
         ''' 
         Returns the number of transitions currently
@@ -78,20 +79,18 @@ class EPISODIC_FIFO(object):
                 # Storing these each time provides memory to 
                 # run multiple training runs in paralle at the 
                 # cost of efficiency.
-                o = []  
+                o_t = []  
                 o_tp1 = []
                 for j in range(transition-self._sequence_length, transition):
-                    o.append(self._episodes[i][j][0])
+                    o_t.append(self._episodes[i][j][0])
                     o_tp1.append(self._episodes[i][j][1])
-                if self._config.use_conv and self._config.cnn.format == "NHWC":
+                if self.__config.use_conv and self.__config.cnn.format == "NHWC":
                     o_t = np.moveaxis(o_t, 1, -1)
                     o_tp1 = np.moveaxis(o_tp1, 1, -1)
                 transitionTuple = np.copy(self._episodes[i][transition-1])
-                transitionTuple[0] = observations
-                transitionTuple[1] = observations_tp1
+                transitionTuple[0] = o_t
+                transitionTuple[1] = o_tp1
                 samples.append(transitionTuple)
-
-
         return samples
    
     def getAllUnzippedOutcomes(self):
