@@ -1,4 +1,4 @@
-# Lenient and Optimistic Multi-Agent Deep Reinforcement Learning Approaches
+# Lenient and Optimistic MA-DRL Approaches
 
 This framework provides implementations for the algorithms and environments discussed in:
 
@@ -12,16 +12,20 @@ Gregory Palmer, Karl Tuyls, Daan Bloembergen, Rahul Savani. </br>
 Proceedings of the 17th International Conference on Autonomous Agents and MultiAgent Systems (AAMAS) </br>
 [&nbsp;<a href="https://dl.acm.org/citation.cfm?id=3237451" target="_blank">ACM Digital Library</a>&nbsp;|&nbsp; <a href="https://arxiv.org/abs/1707.04402v2" target="_blank">arXiv</a>&nbsp;]
 
-# Apprentice Firemen Game
+## Apprentice Firemen Game
 
-Layouts:
+### Layouts
 
-![Layout 1: Observable Irrevocable Decision](img/afg_v1.png "Layout 1: Observable Irrevocable Decision")
-![Layout 2: Irrevocable Decisions in Seclusion](img/afg_v2.png "Layout 2: Irrevocable Decisions in Seclusion")
+![Layout 1: Observable Irrevocable Decision](img/afg_env1.png "Layout 1: Observable Irrevocable Decision")
+![Layout 2: Irrevocable Decisions in Seclusion](img/afg_env2.png "Layout 2: Irrevocable Decisions in Seclusion")
 
-Rewards:
+### Rewards
 
-![Reward Tables](img/afg_rewards.png "Reward Tables")
+Reward structures for Deterministic (DET), Partially Stochastic (PS) and Fully Stochastic (FS) Apprentice Firemen Games, to be interpreted as rewards for (Agent 1, Agent 2). For (B,B)* within PS and FS 1.0 is yielded on 60\% of occasions. Rewards are sparse, received only at the end of an episode after the fire has been extinguished.
+
+<img src="img/AFG_Reward_Table.png" alt="Reward Tables" width="100%"/>
+
+### Running the AFG
 
 The environment flag can be used to specify the layout (V{1,2}), number of civilians (C{INT}) and the reward structure ({DET,PS,FS}):
 
@@ -31,9 +35,9 @@ Further layout config files can be added under:
 
 	./env/ApprenticeFiremen/
 
-# Fully Cooperative Multi-agent Object Transporation Problem (CMOTP)
+## Fully Cooperative Multi-agent Object Transporation Problem (CMOTP)
 
-Layouts:
+### Layouts:
 
 1. CMOTP_V1 = Original
 2. CMOTP_V2 = Narrow Passages
@@ -50,21 +54,17 @@ Further layout config files can be added under:
 
 Simply copy one of the existing envconfig files and make your own amendments.
 
-# Instructions
-
-## Usage:
+### Running the CMOTP:
 
 Agents can be trained via: 
 
-	python main.py --environment CMOTP_V1 --render False
+	python cmotp.py --environment CMOTP_V1 --render False
 
 ## Choosing a MA-DRL algorithm
 
-For lenient/hysteretic agents:   
+For lenient/hysteretic/nui agents:   
 
-	python main.py --environment CMOTP_V1 --render False --madrl leniency
-	python main.py --environment CMOTP_V1 --render False --madrl hysteretic
-
+	python {apprentice_firemen, cmotp}.py --madrl {hysteretic, leniency, nui}
 
 ## Hyperparameters
 
