@@ -44,9 +44,6 @@ class AUTOENCODER(Network):
                
                 self.dl1_flat = linear(self.dense_sig_with_noise, 1024, activation=activation_fn, name='dl1_flat')
 
-                # Most likely batch size will have to be changed, since the autoencoder should be pre-trained
-                # once sufficient variance is available. Probably a larger batch size can be used than the 32
-                # with which the agents are currently trained... 
                 self.dl1_2d = tf.reshape(self.dl1_flat, [32, 4, 4, 64])
                 
                 self.l1_decode = conv2d_transpose(self.dl1_2d,
