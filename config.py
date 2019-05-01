@@ -147,7 +147,7 @@ class Config(object):
         def __init__(self):
             self.__type          = 'EPISODIC_FIFO'  # Options: FIFO, EPISODIC_FIFO (Ingored for Leniency and NUI)
             self.__size          = 250000           # Transitions for FIFO, Episodes for Episodic_FIFO
-            self.__threshold     = 150              # Learning threshold
+            self.__threshold     = 50              # Learning threshold (transitions for fifo, episodes for EPISODIC_FIFO)
             self.__batch_size    = 32               # Training batch size
             self.__train_steps   = 4                # Time between replay memory sampling
             self.__sequence_len  = 1                # Sampled transition trajectory length
@@ -454,7 +454,7 @@ class Config(object):
         """ NUI (Negative Update Intervals) hyperparameters """
         def __init__(self):
             self.__max_episodes    = 100   # Max episodes per replay memory
-            self.__decay_threshold = 400   # Intervals are expanded after specified number of episodes
+            self.__decay_threshold = 50   # Intervals are expanded after specified number of episodes
             self.__decay           = 0.995 # Decay rate applied to lower bound
             self.__eps             = 0.0   # Small value subtracted from max r
 

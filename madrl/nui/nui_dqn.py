@@ -61,6 +61,7 @@ class NUI_DQN(DQN):
         '''
         clear = False
         if terminal > 0.0:
+            print("RM Size: " + str(self.replay_memory.getSize()))
             print(str(self.c.id) + " meta_action: " + str(meta_action)) 
             self.replay_memory.intervals.trackRewards(meta_action, reward)
             if reward > self.maxRewards[meta_action]:

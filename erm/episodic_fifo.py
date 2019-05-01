@@ -28,7 +28,7 @@ class EPISODIC_FIFO(object):
         Returns the number of transitions currently
         stored inside the list. 
         '''
-        return self._num_transitions_stored
+        return len(self._episodes) #self._num_transitions_stored
 
     def addStateTransition(self, transition):
         '''

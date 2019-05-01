@@ -11,7 +11,7 @@ flags = tf.app.flags
 # CMOTP:
 # -CMOTP_V{1,2,3}
 flags.DEFINE_string('environment', 'CMOTP_V1', 'Environment.') 
-flags.DEFINE_string('madrl', 'leniency', 'MA-DRL extension. Options: None, leniency, hysteretic')
+flags.DEFINE_string('madrl', 'hysteretic', 'MA-DRL extension. Options: None, leniency, hysteretic')
 flags.DEFINE_string('format', 'NHWC', 'Format for conv (NHWC or NCHW)')
 flags.DEFINE_string('processor', '/gpu:0', 'GPU/CPU.')
 flags.DEFINE_integer('episodes', 5000, 'Number of episodes.')

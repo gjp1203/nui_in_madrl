@@ -172,7 +172,7 @@ class DRL(object):
         # Return action
         self.current = np.copy(o_t)
         self.__tau.append(np.copy(o_t))
-        if self.c.cnn.format == "NHWC":
+        if self.c.cnn.format == "NHWC" and len(self.c.dim) == 2:
             return self.getAction(np.moveaxis(self.__tau, 0, -1), explore)        
         return self.getAction(self.__tau, explore)
 

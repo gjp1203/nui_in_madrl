@@ -30,9 +30,9 @@ class DQN(DRL):
         :param tensor o_t: observation
         '''
         if len(self.c.dim) == 3:
-            self.current = np.copy(o_t).squeeze()
-
-        self.action = self.explore(self.current, self.episodeCounter, self.aboveLearningThreshold(), explore=explore)
+            o_t = np.array(o_t).squeeze()
+            self.current = np.copy(o_t)
+        self.action = self.explore(o_t, self.episodeCounter, self.aboveLearningThreshold(), explore=explore)
         return self.action
 
     def getSaliencyCoordinates(self, obs, coordinates, location, hw):
@@ -130,11 +130,9 @@ class DQN(DRL):
         Optimises DQN
         '''
         o_t, o_tp1, action, reward, terminal = self.getUnzippedSamples()
-        if self.c.cnn.format == "NHWC":
+        if self.c.cnn.format == "NHWC" and len(self.c.dim) == 2:
             o_t = np.moveaxis(o_t, 1, -1)
             o_tp1 = np.moveaxis(o_tp1, 1, -1)
-
-        
         optDict = self.loadDict(self.calcTargets(terminal, o_tp1, reward), action, o_t)
         self.optUsingDict(optDict)
 

@@ -71,8 +71,7 @@ class NUI_ERM(EPISODIC_FIFO):
 
     def getSize(self):
 	''' 
-	Returns the number of transitions currently
-	stored inside the list. 
+	Returns the number of transitions currently stored inside the list. 
 	'''
         count = 0
         for i in range(self.__config.meta_actions):

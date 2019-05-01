@@ -35,7 +35,7 @@ def convLayers(inputs, c):
     weights_init = tflearn.initializations.xavier()
     bias_init = tf.constant_initializer(0.1)
     #print(inputs.get_shape())
-    inputs = tf.math.divide(inputs, c.cnn.max_in)
+    inputs = tf.div(inputs, c.cnn.max_in)
     layer = 0
     for (o, k, s) in zip(c.cnn.outdim, c.cnn.kernels, c.cnn.stride):
         inputs = conv2d(inputs, o, [k, k], [s, s], name='conv' + str(layer), format=c.cnn.format)
