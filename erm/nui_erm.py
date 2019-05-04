@@ -20,7 +20,6 @@ class NUI_ERM(EPISODIC_FIFO):
         self.__intervals = NUI(config) # Create Negative Update Intervals instance
         self.__ERMs = dict((i,deque([])) for i in range(config.meta_actions)) 
         self.__episodeCounter = 0
-        self.__config = config
 
     @property
     def ERMs(self):
@@ -74,7 +73,7 @@ class NUI_ERM(EPISODIC_FIFO):
 	Returns the number of transitions currently stored inside the list. 
 	'''
         count = 0
-        for i in range(self.__config.meta_actions):
+        for i in range(self.c.meta_actions):
             count += len(self.__ERMs[i]) 
         return count
 
@@ -98,7 +97,7 @@ class NUI_ERM(EPISODIC_FIFO):
         :param episode to add to queue
         :param key indicating which meta action was used
         '''
-        if len(self.__ERMs[key]) >= self.__config.nui.max_episodes:
+        if len(self.__ERMs[key]) >= self.c.nui.max_episodes:
             self.__ERMs[key].popleft() 
         self.__ERMs[key].append(ep)
 
@@ -120,7 +119,7 @@ class NUI_ERM(EPISODIC_FIFO):
         '''
         :return bool: True if the number of transitions stored is above the learning threshold.
         '''
-        return True if self.__episodeCounter > self.__config.nui.decay_threshold else False
+        return True if self.__episodeCounter > self.c.nui.decay_threshold else False
 
     def get_mini_batch(self):
         '''
@@ -128,27 +127,27 @@ class NUI_ERM(EPISODIC_FIFO):
 	:return list traces: List of traces
 	'''
         self._episodes = []
-        for i in range(self.__config.meta_actions):
+        for i in range(self.c.meta_actions):
             self._episodes = self._episodes + list(self.__ERMs[i])
 
         samples = [] # List used to store n traces used for sampling
         # Episodes are randomly choosen for sequence sampling:
-        indexes = [random.randrange(len(self._episodes)) for i in range(self._batch_size)]
+        indexes = [random.randrange(len(self._episodes)) for i in range(self.c.erm.batch_size)]
         # From each of the episodes a sequence is selected:
-        if len(self.__config.dim) == 3:
+        if len(self.c.dim) == 3:
  	    # From each of the episodes a sequence is selected:
 	    for i in indexes:
                 samples.append(self._episodes[i][random.randint(0, len(self._episodes[i])-1)])
         else:
             for i in indexes:
-                transition = random.randint(self._sequence_length, len(self._episodes[i]))
+                transition = random.randint(self.c.erm.sequence_len, len(self._episodes[i]))
                 # State-trajectories are stored in lists.
                 # Storing these each time provides memory to 
                 # run multiple training runs in paralle at the 
                 # cost of efficiency.
                 o = []  
                 o_tp1 = []
-                for j in range(transition-self._sequence_length, transition):
+                for j in range(transition-self.c.erm.sequence_len, transition):
                     o.append(self._episodes[i][j][0])
                     o_tp1.append(self._episodes[i][j][1])
                 transitionTuple = np.copy(self._episodes[i][transition-1])
