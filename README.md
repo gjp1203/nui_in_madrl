@@ -40,7 +40,7 @@ Proceedings of the 17th International Conference on Autonomous Agents and MultiA
 
 Reward structures for Deterministic (DET), Partially Stochastic (PS) and Fully Stochastic (FS) Apprentice Firemen Games, to be interpreted as rewards for (Agent 1, Agent 2). For (B,B) within PS and FS 1.0 is yielded on 60% of occasions. Rewards are sparse, received only at the end of an episode after the fire has been extinguished.
 
-<img src='img/AFG_Reward_Table.png' alt="Reward Tables" width="100%"/>
+<img src='img/reward_tables.png' alt="Reward Tables" width="100%"/>
 
 ### Running the AFG
 
