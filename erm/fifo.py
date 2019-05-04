@@ -16,10 +16,7 @@ class FIFO(object):
         '''
         self.c = c
         self._transitions = deque([], c.erm.size)
-        self._batch_size = c.erm.batch_size
-        self._size = c.erm.size
         self._num_transitions_stored = 0
-        self._learning_threshold = c.erm.threshold
         
     def getSize(self):
         ''' 
@@ -40,7 +37,7 @@ class FIFO(object):
         '''
         :return bool: True if RM is full, false otherwise
         '''
-        return True if len(self._transitions) == self._size else False
+        return True if len(self._transitions) == self.c.erm.size else False
             
 
     def get_mini_batch(self):
@@ -48,7 +45,28 @@ class FIFO(object):
         Method returns a mini-batch of sample traces.
         :return list traces: List of traces
         '''
-        return random.sample(self._transitions, self._batch_size)	
+        # Episodes are randomly choosen for sequence sampling:
+        if len(self.c.dim) == 3:
+ 	    # From each of the episodes a sequence is selected:
+            return random.sample(self._transitions, self.c.erm.batch_size)	
+        else:
+            samples = [] # List used to store n traces used for sampling
+            for i in range(self.c.erm.batch_size):
+                transition = random.randint(self.c.erm.sequence_len, len(self._transitions))
+                # State-trajectories are stored in lists.
+                # Storing these each time provides memory to 
+                # run multiple training runs in paralle at the 
+                # cost of efficiency.
+                o_t = []  
+                o_tp1 = []
+                for j in range(transition-self.c.erm.sequence_len, transition):
+                    o_t.append(self._transitions[j][0])
+                    o_tp1.append(self._transitions[j][1])
+                transitionTuple = np.copy(self._transitions[transition-1])
+                transitionTuple[0] = o_t
+                transitionTuple[1] = o_tp1
+                samples.append(transitionTuple)
+        return samples
 
     def getUnzippedSamples(self):
         '''

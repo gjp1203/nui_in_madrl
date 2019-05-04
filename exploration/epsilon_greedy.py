@@ -16,7 +16,6 @@ class EpsilonGreedy:
         :param tensor o_t: Observation
         :return int: action selected
         '''
-        #print(np.array(o_t).shape)
         self.update(episode, aboveLearningThreshold)
         with self.__sess.as_default():
             if random.random() < self.__epsilon and explore:

@@ -145,9 +145,9 @@ class Config(object):
 
         """ ERM Config """
         def __init__(self):
-            self.__type          = 'EPISODIC_FIFO'  # Options: FIFO, EPISODIC_FIFO (Ingored for Leniency and NUI)
+            self.__type          = 'FIFO'  # Options: FIFO, EPISODIC_FIFO (Ingored for Leniency and NUI)
             self.__size          = 250000           # Transitions for FIFO, Episodes for Episodic_FIFO
-            self.__threshold     = 50              # Learning threshold (transitions for fifo, episodes for EPISODIC_FIFO)
+            self.__threshold     = 200000           # Learning threshold transitions (Use epsiodes for NUI)
             self.__batch_size    = 32               # Training batch size
             self.__train_steps   = 4                # Time between replay memory sampling
             self.__sequence_len  = 1                # Sampled transition trajectory length
@@ -307,7 +307,7 @@ class Config(object):
         def __init__(self):
             self.__double = True             # Double Q-Learning
             self.__max    = 1.0              # max val that output can approximate
-            self.__exploration = 'epsGreedy' # Options: epsGreedy, tBarGreedy
+            self.__exploration = 'epsGreedy' # Options: CepsGreedy, tBarGreedy
             self.__alpha = 0.0001            # Learning rate
 
         def __repr__(self):
@@ -409,7 +409,7 @@ class Config(object):
         def __init__(self):
             self.__initial  = 1.0
             self.__min      = 0.1
-            self.__update   = 1       # Update eps every n episodes
+            self.__update   = 1      # Update eps every n episodes
             self.__discount = 0.999  # Epsilong discount factor
 
         def __repr__(self):
