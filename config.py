@@ -485,7 +485,7 @@ class Config(object):
             self.__max                   = 1.0          # Initial temperature
             self.__min                   = 0.0          # Min temperature value
             self.__tmc                   = 3.0          # Leniency moderatoin coefficient
-            self.__hashing               = 'AutoEncoder'     # Options: xxhash, AutoEncoder, L2 (Layer2)
+            self.__hashing               = 'xxhash'     # Options: xxhash, AutoEncoder, L2 (Layer2)
             self.__max_temperature_decay = 0.999        # Used for global temperature decay
             self.__threshold             = 200000       # Temperature update threshold
             if method == 'TDS':
