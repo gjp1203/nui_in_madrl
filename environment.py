@@ -12,7 +12,7 @@ class Environment(object):
                 version = int(re.sub("[^0-9]", "", params[1]))
                 civilians = int(re.sub("[^0-9]", "", params[2]))
                 rmode = params[3]
-                if version == 1 and 'AP' in params[4]:
+                if version == 3 and 'AP' in params[4]:
                      accesspoints = int(re.sub("[^0-9]", "", params[4]))
                 else:
                      accesspoints = None

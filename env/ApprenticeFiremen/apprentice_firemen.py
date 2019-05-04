@@ -23,20 +23,20 @@ class ApprenticeFiremen(object):
         '''
         if version == 1:
             from envconfig_v1 import EnvConfigV1
-            self.c = EnvConfigV1(civilians, accesspoints)
+            self.c = EnvConfigV1(civilians)
         if version == 2:
             from envconfig_v2 import EnvConfigV2
             self.c = EnvConfigV2(civilians)
         if version == 3:
             from envconfig_v3 import EnvConfigV3
-            self.c = EnvConfigV3(civilians)
+            self.c = EnvConfigV3(civilians, accesspoints)
         if self.c.CHALLENGING_COLORS:
             import hardcolors
             self.colors = hardcolors
         else:
             import colors
             self.colors = colors
-
+        self.accesspoints = accesspoints
         self.eval = 0
         self.episode_count = 0 
         self.civilians = [Civilian(self.c) for i in range(self.c.CIVILIANS)]
@@ -288,8 +288,6 @@ class ApprenticeFiremen(object):
         '''
         Method used to initiate the obstacles within the environment 
         '''
-        #self.s_t = np.zeros((self.c.GH, self.c.GW), dtype=np.float32)
-        #self.s_t_reduced = np.zeros((self.c.GH, self.c.GW), dtype=np.float32)
         self.s_t = np.zeros((self.c.GH, self.c.GW, self.c.CHANNELS), dtype=np.float32)
         self.s_t_reduced = np.zeros((self.c.GH, self.c.GW, self.c.CHANNELS), dtype=np.float32)
         for y, x in self.c.OBSTACLES_YX:
@@ -455,7 +453,7 @@ class ApprenticeFiremen(object):
         try:
 	    img = np.repeat(np.repeat(self.global_observation, r, axis=0), r, axis=1).astype(np.uint8)
             cv2.imshow('image', img)
-            k = cv2.waitKey(50)
+            k = cv2.waitKey(1)
             if k == 27:         # If escape was pressed exit
                 cv2.destroyAllWindows()
         except AttributeError:
@@ -576,6 +574,8 @@ class ApprenticeFiremen(object):
         Method verifies is grid coordinate is obstacle free
         :return bool: True if obstacle is at grid location
         '''
+        if self.accesspoints == 1 and (x, y) == self.c.OVERLAP_XY:
+            return False
         key = str(x)+"_"+str(y) 
         for c in self.civilians:
             if (x, y) == c.getXY(): 

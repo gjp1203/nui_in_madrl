@@ -51,9 +51,9 @@ class Civilian:
 	'''
         r = random.randrange(2)
         if r == 0:
-            self.y = self.c.VMP-4 # y coordinate is set
+            self.y = self.c.VMP-self.c.CIVILIAN_SHIFT # y coordinate is set
         else:
-            self.y = self.c.VMP+4 # y coordinate is set
+            self.y = self.c.VMP+self.c.CIVILIAN_SHIFT # y coordinate is set
         self.x = self.c.HMP # x coordinate is set
 
 

@@ -27,6 +27,7 @@ class EnvConfigV2:
         self.Y_LOWER_BOUNDARY = self.VMP - 5
         self.X_UPPER_BOUNDARY = self.HMP + 5
         self.X_LOWER_BOUNDARY = self.HMP - 5
+        self.CIVILIAN_SHIFT = 3
 
         # Fire coordinates
 	self.FIRE_X = None
