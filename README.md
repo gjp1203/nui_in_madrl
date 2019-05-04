@@ -28,7 +28,7 @@ Proceedings of the 17th International Conference on Autonomous Agents and MultiA
 
 ### Access Points Layouts
 
-![Access Point Layouts"](img/Access_Points.png "Access Point Layouts")
+![Access Point Layouts](img/Access_Points.png "Access Point Layouts")
 
 ### Rewards
 
