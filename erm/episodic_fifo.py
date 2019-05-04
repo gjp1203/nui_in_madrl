@@ -16,19 +16,15 @@ class EPISODIC_FIFO(object):
         '''
         self._episodes = deque([])
         self._episode = []
-        self._batch_size = c.erm.batch_size
-        self._sequence_length = c.erm.sequence_len
-        self._size = c.erm.size
         self._num_transitions_stored = 0
-        self._learning_threshold = c.erm.threshold
-        self.__config = c
+        self.c = c
 
     def getSize(self):
         ''' 
         Returns the number of transitions currently
         stored inside the list. 
         '''
-        return len(self._episodes) #self._num_transitions_stored
+        return self._num_transitions_stored
 
     def addStateTransition(self, transition):
         '''
@@ -56,7 +52,7 @@ class EPISODIC_FIFO(object):
         '''
         :return bool: True if RM is full, false otherwise
         '''
-        return True if self._num_transitions_stored >= self._size else False
+        return True if self._num_transitions_stored >= self.c.erm.size else False
             
 
     def get_mini_batch(self):
@@ -66,27 +62,24 @@ class EPISODIC_FIFO(object):
         '''
         samples = [] # List used to store n traces used for sampling
         # Episodes are randomly choosen for sequence sampling:
-        indexes = [random.randrange(len(self._episodes)) for i in range(self._batch_size)]
+        indexes = [random.randrange(len(self._episodes)) for i in range(self.c.erm.batch_size)]
         # From each of the episodes a sequence is selected:
-        if len(self.__config.dim) == 3:
+        if len(self.c.dim) == 3:
  	    # From each of the episodes a sequence is selected:
 	    for i in indexes:
                 samples.append(self._episodes[i][random.randint(0, len(self._episodes[i])-1)])
         else:
             for i in indexes:
-                transition = random.randint(self._sequence_length, len(self._episodes[i]))
+                transition = random.randint(self.c.erm.sequence_len, len(self._episodes[i]))
                 # State-trajectories are stored in lists.
                 # Storing these each time provides memory to 
                 # run multiple training runs in paralle at the 
                 # cost of efficiency.
                 o_t = []  
                 o_tp1 = []
-                for j in range(transition-self._sequence_length, transition):
+                for j in range(transition-self.c.erm.sequence_len, transition):
                     o_t.append(self._episodes[i][j][0])
                     o_tp1.append(self._episodes[i][j][1])
-                if self.__config.use_conv and self.__config.cnn.format == "NHWC":
-                    o_t = np.moveaxis(o_t, 1, -1)
-                    o_tp1 = np.moveaxis(o_tp1, 1, -1)
                 transitionTuple = np.copy(self._episodes[i][transition-1])
                 transitionTuple[0] = o_t
                 transitionTuple[1] = o_tp1

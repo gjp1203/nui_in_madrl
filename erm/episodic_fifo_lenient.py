@@ -48,7 +48,7 @@ class EPISODIC_FIFO_LENIENT(EPISODIC_FIFO):
         ''' 
         Returns the number of transitions currently stored inside the list. 
         '''
-        return len(self._episodes) #self._num_transitions_stored
+        return self._num_transitions_stored
 
     def aboveLeniencyThreshold(self):
         '''

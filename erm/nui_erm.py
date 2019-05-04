@@ -151,9 +151,6 @@ class NUI_ERM(EPISODIC_FIFO):
                 for j in range(transition-self._sequence_length, transition):
                     o.append(self._episodes[i][j][0])
                     o_tp1.append(self._episodes[i][j][1])
-                if self._config.use_conv and self._config.cnn.format == "NHWC":
-                    o_t = np.moveaxis(o_t, 1, -1)
-                    o_tp1 = np.moveaxis(o_tp1, 1, -1)
                 transitionTuple = np.copy(self._episodes[i][transition-1])
                 transitionTuple[0] = observations
                 transitionTuple[1] = observations_tp1
