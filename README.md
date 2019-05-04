@@ -14,10 +14,21 @@ Proceedings of the 17th International Conference on Autonomous Agents and MultiA
 
 ## Apprentice Firemen Game
 
-### Layouts
+### City Grid Layouts 
 
+<figure class="image">
 ![Layout 1: Observable Irrevocable Decision](img/afg_env1.png "Layout 1: Observable Irrevocable Decision")
+<figcaption>Layout 1: Observable Irrevocable Decision</figcaption>
+</figure>
+
+<figure class="image">
 ![Layout 2: Irrevocable Decisions in Seclusion](img/afg_env2.png "Layout 2: Irrevocable Decisions in Seclusion")
+<figcaption>Layout 2: Irrevocable Decisions in Seclusion]</figcaption>
+</figure>
+
+### Access Points Layouts
+
+![Access Point Layouts"](img/Access_Points.png "Access Point Layouts")
 
 ### Rewards
 
@@ -30,6 +41,10 @@ Reward structures for Deterministic (DET), Partially Stochastic (PS) and Fully S
 The environment flag can be used to specify the layout (V{1,2}), number of civilians (C{INT}) and the reward structure ({DET,PS,FS}):
 
 	python apprentice_firemen.py --environment ApprenticeFiremen_V{1,2}_C{INT}_{DET,PS,FS}
+
+For Layout 3 the number of access points must be specified:
+
+	python apprentice_firemen.py --environment ApprenticeFiremen_V{1,2}_C{INT}_{DET,PS,FS}_{1,2,3,4}AP
 
 Further layout config files can be added under:
 
