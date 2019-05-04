@@ -65,7 +65,7 @@ for i in range(FLAGS.episodes):
         # Check if last step has been reached
         if j == FLAGS.steps-1:
             t = True
-
+            rewards = [-1,-1] 
 	for agent, o, r, e, ro in zip(agents, observations, rewards, equipment, reduced_observations):
             if FLAGS.madrl is 'leniency':
                 agent.feedback(r, t, o, reduced_observation=ro)
