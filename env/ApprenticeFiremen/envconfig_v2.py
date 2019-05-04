@@ -56,11 +56,10 @@ class EnvConfigV2:
             if (i < self.CP+11 and i > self.CP+5) or (i > self.GW-self.CP-12 and i < self.GW-self.CP-6):
                 for j in range(self.GH):
                     if j != self.VMP:
-                       self.OBSTACLES_YX.append((j, i))
-            if (i < self.CP+11) or (i > self.GW-self.CP-7):
-                for j in range(self.GH):
-                    if j < self.VMP-2 or j > self.VMP+2: 
                         self.OBSTACLES_YX.append((j, i))
+            if (i < self.CP+11) or (i > self.GW-self.CP-12):
+                for j in range(self.GH):
+                    self.OBSTACLES_YX.append((j, i))
             if i%2 == 1 and i > self.CP+11 and i < self.GW-self.CP-12:
                 self.OBSTACLES_YX.append((self.VMP, i))
                 self.OBSTACLES_YX.append((self.VMP-2, i))
@@ -82,13 +81,7 @@ class EnvConfigV2:
 	                    ('fire_exstinguisher',self.HMP-2, self.GW-self.CP-4),
                             ('charge', self.HMP+2, self.CP+3),
                             ('fire_blanket', self.HMP, self.CP+3),
-	                    ('fire_exstinguisher',self.HMP-2, self.CP+3),
-                            ('charge', self.CP+3, self.VMP+2),
-                            ('fire_blanket', self.CP+3,  self.VMP),
-	                    ('fire_exstinguisher', self.CP+3, self.VMP-2),
-                            ('charge', self.GH-self.CP-4, self.VMP+2),
-                            ('fire_blanket', self.GH-self.CP-4, self.VMP),
-	                    ('fire_exstinguisher', self.GH-self.CP-4, self.VMP-2)]
+	                    ('fire_exstinguisher',self.HMP-2, self.CP+3)]
 
         """ Agent observation space """
         self.AHEAD_VIEW = 6
