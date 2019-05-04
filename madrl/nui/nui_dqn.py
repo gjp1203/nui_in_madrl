@@ -28,6 +28,12 @@ class NUI_DQN(DQN):
         from erm.nui_erm import NUI_ERM as ReplayMemory
         self.replay_memory = ReplayMemory(self.c)
 
+    def aboveLearningThreshold(self):
+        '''
+        Returns true if transitions stored in ERM is above the learning threshold.
+        '''
+        return self.replay_memory.getSize() >= self.c.nui.threshold
+
     def optimise(self):
         '''
         Optimises NUI DQN
