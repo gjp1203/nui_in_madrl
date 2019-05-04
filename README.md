@@ -15,17 +15,17 @@ Proceedings of the 17th International Conference on Autonomous Agents and MultiA
 ## Apprentice Firemen Game
 
 ### City Grid Layouts 
-<table style'border:0px'>
+<table>
 <tr>
 <td> 
 <figure>
-<img src='img/afg_env1.png' height='250'/><br>
+<img src='img/afg_env1.png' height='350'/><br>
 <font size="1"><figcaption>Layout 1: Observable Irrevocable Decision</figcaption></font>
 </figure>
 </td>
 <td> 
 <figure>
-<img src='img/afg_env2.png' height='250'/><br>
+<img src='img/afg_env2.png' height='350'/><br>
 <font size="1"><figcaption>Layout 2: Irrevocable Decisions in Seclusion</figcaption></font>
 </figure>
 </td>
