@@ -163,7 +163,6 @@ class DQN(DRL):
                     self.delta = self.targets - self.activeQValues
 
                     self.deltaAfter = self.deltaProcessing()
-                  
                     with tf.name_scope('loss'):
                         self.loss = tf.reduce_mean(hLoss(self.deltaAfter), name='loss')                   
                         self.optim = tf.train.AdamOptimizer(self.c.dqn.alpha).minimize(self.loss)
