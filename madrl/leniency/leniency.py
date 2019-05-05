@@ -27,6 +27,9 @@ class Leniency(DQN):
         Load action using observation as input
         :param tensor o_t: state
         '''
+        if len(self.c.dim) == 3:
+            o_t = np.array(o_t).squeeze()
+            self.current = np.copy(o_t)
         if self.c.dqn.exploration== 'tBarGreedy':
             self.action = self.explore(o_t,\
                                        self.index,\
