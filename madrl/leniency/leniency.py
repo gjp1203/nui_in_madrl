@@ -60,7 +60,7 @@ class Leniency(DQN):
         :param int t: Timestep used to determine if sync should take place
         '''
         o_t, o_tp1, action, reward, terminal,_,_, leniency, _ = self.getUnzippedSamples()
-        if self.c.cnn.format == "NHWC":
+        if self.c.cnn.format == "NHWC" and len(self.c.dim) == 2:
             o_t = np.moveaxis(o_t, 1, -1)
             o_tp1 = np.moveaxis(o_tp1, 1, -1)
         optDict = self.loadDict(self.calcTargets(terminal, o_tp1, reward), action, o_t)
