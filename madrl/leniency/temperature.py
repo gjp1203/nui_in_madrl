@@ -69,7 +69,7 @@ class Temperature:
         Called to train hash key network
         '''
 	o_t, _, _, _, _, _, _, _, _ = self._replay_memory.getUnzippedSamples()
-        if self.c.cnn.format == "NHWC":
+        if self.c.cnn.format == "NHWC" and len(self.c.dim) == 2:
             o_t = np.moveaxis(o_t, 1, -1)
         optDict = {self._net.inputs: o_t}
         _, outputs, loss = self._sess.run([self._net.optim, self._net.outputs, self._net.ae_loss], optDict)
@@ -97,7 +97,7 @@ class Temperature:
             s_t = np.moveaxis([s_t], 0, -1)
         if self.c.leniency.hashing == 'AutoEncoder':
             self._time += 1
-            if self._time%4 == 0 and self._replay_memory.getSize() > 100:
+            if self._time%4 == 0 and self._time > self.c.leniency.aestart and self._time < self.c.leniency.aeend:
                 self.trainNet()
         if self.c.leniency.hashing is not 'xxhash':
             index_array =  self._net.fetch('simHash', self._sess, [s_t])
