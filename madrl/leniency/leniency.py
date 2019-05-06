@@ -102,7 +102,7 @@ class Leniency(DQN):
         if self.index == None:
             self.index = self.replay_memory.getHashKey(self.current)
 
-        if reduced_observation == None:
+        if reduced_observation is None:
             self._index_tp1 = self.replay_memory.getHashKey(self.current)
         else:
             self._index_tp1 = self.replay_memory.getHashKey(reduced_observation)
