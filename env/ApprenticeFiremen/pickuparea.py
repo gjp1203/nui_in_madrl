@@ -1,4 +1,4 @@
-from tool import Tool
+from env.ApprenticeFiremen.tool import Tool
 import colors
 class Pickuparea:
     """Implementation of a pickup location."""

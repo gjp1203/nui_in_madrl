@@ -1,6 +1,6 @@
 from random import randint
 import random as random
-import colors
+import env.ApprenticeFiremen.colors
 import sys
 
 class Civilian:

@@ -1,13 +1,13 @@
-from fire_exstinguisher import Fire_Exstinguisher
-from fire_blanket import Fire_Blanket
+from env.ApprenticeFiremen.fire_exstinguisher import Fire_Exstinguisher
+from env.ApprenticeFiremen.fire_blanket import Fire_Blanket
 from matplotlib import pyplot as plt
-from pickuparea import Pickuparea
-from civilian import Civilian
+from env.ApprenticeFiremen.pickuparea import Pickuparea
+from env.ApprenticeFiremen.civilian import Civilian
 from scipy.misc import imsave 
-from fireman import Fireman
+from env.ApprenticeFiremen.fireman import Fireman
 from config import Config
-from charge import Charge
-from fire import Fire
+from env.ApprenticeFiremen.charge import Charge
+from env.ApprenticeFiremen.fire import Fire
 import numpy as np
 import os.path
 import random
@@ -229,7 +229,7 @@ class ApprenticeFiremen(object):
         xlist = []
         ylist = []
         for i in range(len(self.firemen)/2):
-	    if self.c.FIRE_X == None and self.c.FIRE_Y == None:
+            if self.c.FIRE_X == None and self.c.FIRE_Y == None:
                 while True:
                     x = random.randrange(self.c.HMP-4, self.c.HMP+4, 2)
                     y = random.randrange(self.c.VMP-4, self.c.VMP+4, 2)
@@ -238,9 +238,9 @@ class ApprenticeFiremen(object):
                         xlist.append(x)
                         ylist.append(y)
                         break
-	    else:
-		x = self.c.FIRE_X() 
-		y = self.c.FIRE_Y()
+            else:
+                x = self.c.FIRE_X() 
+                y = self.c.FIRE_Y()
                 key = str(x)+"_"+str(y) 
             self.fires.update({key:Fire(x,y,self.rewardMode, self.colors.FIRE)})
              
@@ -262,9 +262,9 @@ class ApprenticeFiremen(object):
         '''
         Method for initialising the pickup locations
         '''  
-	self.plocations = []
+        self.plocations = []
         for tool, x, y in self.c.PICKUP_LOCATIONS:
-	    self.plocations.append(Pickuparea(self.createTool[tool](), x, y))
+            self.plocations.append(Pickuparea(self.createTool[tool](), x, y))
 
     def newCharge(self):
         '''
@@ -425,16 +425,16 @@ class ApprenticeFiremen(object):
 	# Offset is added after making the state space
 	# s_t toroidal
         o = self.c.OFFSET
-	os_x = x + o # offset_x
-	os_y = y + o # offset_y
+        os_x = x + o # offset_x
+        os_y = y + o # offset_y
         x1 = os_x - o
         x2 = os_x + o+1
         y1 = os_y - o
         y2 = os_y + o+1
         if reduced:
-	    return np.copy(self.reduced_toroidal_s_t[y1:y2, x1:x2])
+            return np.copy(self.reduced_toroidal_s_t[y1:y2, x1:x2])
         else:
-	    return np.copy(self.toroidal_s_t[y1:y2, x1:x2])
+            return np.copy(self.toroidal_s_t[y1:y2, x1:x2])
 
     def saveStateImage(self, img, name='outfile.jpg', r=8):
         '''
@@ -449,9 +449,9 @@ class ApprenticeFiremen(object):
         '''
         Used to render the env.
         '''
-	r = 16
+        r = 16
         try:
-	    img = np.repeat(np.repeat(self.global_observation, r, axis=0), r, axis=1).astype(np.uint8)
+            img = np.repeat(np.repeat(self.global_observation, r, axis=0), r, axis=1).astype(np.uint8)
             cv2.imshow('image', img)
             k = cv2.waitKey(1)
             if k == 27:         # If escape was pressed exit
@@ -595,9 +595,9 @@ class ApprenticeFiremen(object):
         find themselves in positions adjecent to a tool. 
         '''
         for f in self.firemen:
-	    if f.holdingTool() == False:
-	        location = f.getXY()
-	        for p in self.plocations:
+            if f.holdingTool() == False:
+                location = f.getXY()
+                for p in self.plocations:
                     if location == p.getXY(): # If agent is at pickup location
                         f.useTool(p.getToolName())
 

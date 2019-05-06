@@ -1,8 +1,8 @@
 import sys
-from tool import Tool
-from fire_blanket import Fire_Blanket
-from fire_exstinguisher import Fire_Exstinguisher
-from charge import Charge
+from env.ApprenticeFiremen.tool import Tool
+from env.ApprenticeFiremen.fire_blanket import Fire_Blanket
+from env.ApprenticeFiremen.fire_exstinguisher import Fire_Exstinguisher
+from env.ApprenticeFiremen.charge import Charge
 import random
 
 class Fireman:

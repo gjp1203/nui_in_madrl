@@ -1,5 +1,5 @@
-from tool import Tool
-import colors
+from env.ApprenticeFiremen.tool import Tool
+import env.ApprenticeFiremen.colors
 class Fire_Exstinguisher(Tool):
     """ Fire exstinguisher tool """
     NAME = 'fire_exstinguisher'
