@@ -123,9 +123,9 @@ class NUI_ERM(EPISODIC_FIFO):
 
     def get_mini_batch(self):
         '''
-	Method returns a mini-batch of sample traces.
-	:return list traces: List of traces
-	'''
+        Method returns a mini-batch of sample traces.
+        :return list traces: List of traces
+        '''
         self._episodes = []
         for i in range(self.c.meta_actions):
             self._episodes = self._episodes + list(self.__ERMs[i])
@@ -135,8 +135,8 @@ class NUI_ERM(EPISODIC_FIFO):
         indexes = [random.randrange(len(self._episodes)) for i in range(self.c.erm.batch_size)]
         # From each of the episodes a sequence is selected:
         if len(self.c.dim) == 3:
- 	    # From each of the episodes a sequence is selected:
-	    for i in indexes:
+            # From each of the episodes a sequence is selected:
+            for i in indexes:
                 samples.append(self._episodes[i][random.randint(0, len(self._episodes[i])-1)])
         else:
             for i in indexes:
