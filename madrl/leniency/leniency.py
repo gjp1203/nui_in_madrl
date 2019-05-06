@@ -27,6 +27,9 @@ class Leniency(DQN):
         Load action using observation as input
         :param tensor o_t: state
         '''
+        if len(self.c.dim) == 3:
+            o_t = np.array(o_t).squeeze()
+            self.current = np.copy(o_t)
         if self.c.dqn.exploration== 'tBarGreedy':
             self.action = self.explore(o_t,\
                                        self.index,\
@@ -60,7 +63,7 @@ class Leniency(DQN):
         :param int t: Timestep used to determine if sync should take place
         '''
         o_t, o_tp1, action, reward, terminal,_,_, leniency, _ = self.getUnzippedSamples()
-        if self.c.cnn.format == "NHWC":
+        if self.c.cnn.format == "NHWC" and len(self.c.dim) == 2:
             o_t = np.moveaxis(o_t, 1, -1)
             o_tp1 = np.moveaxis(o_tp1, 1, -1)
         optDict = self.loadDict(self.calcTargets(terminal, o_tp1, reward), action, o_t)
@@ -99,12 +102,12 @@ class Leniency(DQN):
         if self.index == None:
             self.index = self.replay_memory.getHashKey(self.current)
 
-        if reduced_observation == None:
+        if reduced_observation is None:
             self._index_tp1 = self.replay_memory.getHashKey(self.current)
         else:
             self._index_tp1 = self.replay_memory.getHashKey(reduced_observation)
 
-	self.replay_memory.add_experience([np.copy(self.current),\
+        self.replay_memory.add_experience([np.copy(self.current),\
                                            np.copy(new_state),\
                                            self.action,\
                                            reward,\

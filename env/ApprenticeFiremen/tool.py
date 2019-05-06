@@ -1,4 +1,3 @@
-
 class Tool(object):
     """ Used to create tool object """   
     def __init__(self, color):

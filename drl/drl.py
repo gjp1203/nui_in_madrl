@@ -32,10 +32,10 @@ class DRL(object):
                             c.erm.sequence_len)
            
     def replayMemoryInit(self):
-	'''
-	Instantiate Replay Memory
-	'''
-	if self.c.erm.type == 'FIFO':
+        '''
+        Instantiate Replay Memory
+        '''
+        if self.c.erm.type == 'FIFO':
             from erm.fifo import FIFO as ReplayMemory
         elif self.c.erm.type == 'EPISODIC_FIFO':
             from erm.episodic_fifo import EPISODIC_FIFO as ReplayMemory
@@ -189,7 +189,7 @@ class DRL(object):
         :param int terminal: 1 if terminal state, 0 otherwise
         :param np.array new_state: state entered  at time tp1
         '''
-	self.replay_memory.add_experience([np.copy(self.current),\
+        self.replay_memory.add_experience([np.copy(self.current),\
                                                 np.copy(new_state),\
                                                 self.action,\
                                                 reward,\

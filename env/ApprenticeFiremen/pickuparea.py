@@ -1,5 +1,5 @@
-from tool import Tool
-import colors
+from .tool import Tool
+import env.ApprenticeFiremen.colors
 class Pickuparea:
     """Implementation of a pickup location."""
  
@@ -10,9 +10,9 @@ class Pickuparea:
         :param int y: pickup y coordinate
 
         '''
-	self.tool = tool
-	self.x = x
-	self.y = y
+        self.tool = tool
+        self.x = x
+        self.y = y
   
     def getToolName(self):
         '''
@@ -26,27 +26,27 @@ class Pickuparea:
         :return int self.x: x coordinate
         :return int self.y: y coordinate
         '''
-	return self.x, self.y
+        return self.x, self.y
 
     def empty(self):
         '''
         :return bool: True if pickup location is empty
         '''
-	return True if self.tool == "empty" else False
+        return True if self.tool == "empty" else False
 
     def releaseItem(self):
         '''
         :return tool self.tool: releases tool
         '''
-	tmpTool = self.tool
-	self.tool = "empty"
+        tmpTool = self.tool
+        self.tool = "empty"
         return tmpTool
 
     def getColor(self):
         '''
         :return list int: Tool color
         '''
-	return colors.EMPTY_TILE if self.empty() else self.tool.getColor()
+        return colors.EMPTY_TILE if self.empty() else self.tool.getColor()
  
     def receiveTool(self, tool):
         '''

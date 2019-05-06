@@ -13,10 +13,10 @@ class CMOTP(object):
             from .envconfig_v1 import EnvConfigV1
             self.c = EnvConfigV1()
         if version == 2: # Bottleneck
-            from envconfig_v2 import EnvConfigV2
+            from .envconfig_v2 import EnvConfigV2
             self.c = EnvConfigV2()
         if version == 3: # Stochastic
-            from envconfig_v3 import EnvConfigV3
+            from .envconfig_v3 import EnvConfigV3
             self.c = EnvConfigV3()
 
         # Fieldnames for stats

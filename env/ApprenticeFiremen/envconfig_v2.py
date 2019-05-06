@@ -30,8 +30,8 @@ class EnvConfigV2:
         self.CIVILIAN_SHIFT = 3
 
         # Fire coordinates
-	self.FIRE_X = None
-	self.FIRE_Y = None
+        self.FIRE_X = None
+        self.FIRE_Y = None
 
         """ Obstacles """
         self.OBSTACLES_YX = []

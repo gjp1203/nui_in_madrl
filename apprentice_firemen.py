@@ -12,7 +12,7 @@ flags = tf.app.flags
 # Apprentice Firemen:
 # -ApprenticeFiremen_V{1,2}_C{INT}_{DET,PS,FS}_AP{1,2,3,4}
 flags.DEFINE_string('environment', 'ApprenticeFiremen_V1_C0_DET', 'Environment.') 
-flags.DEFINE_string('madrl', 'nui', 'Options: None, hysteretic, leniency and nui')
+flags.DEFINE_string('madrl', 'leniency', 'Options: None, hysteretic, leniency and nui')
 flags.DEFINE_string('format', 'NHWC', 'Format for conv (NHWC or NCHW)')
 flags.DEFINE_string('processor', '/gpu:0', 'GPU/CPU.')
 flags.DEFINE_integer('save_steps', 100, 'Save model every n steps..')
@@ -46,7 +46,7 @@ for i in range(FLAGS.agents):
 # Start training run
 for i in range(FLAGS.episodes):
     if i%FLAGS.save_steps == 0:
-	for agent in agents:
+        for agent in agents:
             agent.saveModel(folder, i)
        
     # Run episode
@@ -54,8 +54,8 @@ for i in range(FLAGS.episodes):
     for j in range(FLAGS.steps):
 
 	# Load action for each agent
-	actions = []
-	for agent, observation in zip(agents, observations):
+        actions = []
+        for agent, observation in zip(agents, observations):
             if FLAGS.render: env.render()
             actions.append(agent.move(observation))
             agent.opt()
@@ -66,7 +66,7 @@ for i in range(FLAGS.episodes):
         if j == FLAGS.steps-1:
             t = True
             rewards = [-1,-1] 
-	for agent, o, r, e, ro in zip(agents, observations, rewards, equipment, reduced_observations):
+        for agent, o, r, e, ro in zip(agents, observations, rewards, equipment, reduced_observations):
             if FLAGS.madrl is 'leniency':
                 agent.feedback(r, t, o, reduced_observation=ro)
             elif FLAGS.madrl is 'nui':

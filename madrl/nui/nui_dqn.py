@@ -22,9 +22,9 @@ class NUI_DQN(DQN):
         self.__eps = config.nui.eps
 
     def replayMemoryInit(self):
-	'''
-	Instantiate Replay Memory
-	'''
+        '''
+        Instantiate Replay Memory
+        '''
         from erm.nui_erm import NUI_ERM as ReplayMemory
         self.replay_memory = ReplayMemory(self.c)
 
@@ -38,7 +38,7 @@ class NUI_DQN(DQN):
         '''
         Optimises NUI DQN
         '''
-	o_t, o_tp1, a, r, t, idx = self.getUnzippedSamples()
+        o_t, o_tp1, a, r, t, idx = self.getUnzippedSamples()
         optDict = self.loadDict(self.calcTargets(t, o_tp1, r), a, o_t)
         qVals = self.optUsingDict(optDict)
         self.storeQValues(qVals, idx, t)
@@ -55,7 +55,6 @@ class NUI_DQN(DQN):
                 if len(self.qValues[idx[i]]) > 49: 
                     self.qValues[idx[i]].popleft()
                 self.qValues[idx[i]].append(qValues[i])
-
 
     def storeTransitionTuple(self, reward, terminal, new_state, meta_action):
         '''
