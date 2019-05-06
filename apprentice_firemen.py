@@ -46,7 +46,7 @@ for i in range(FLAGS.agents):
 # Start training run
 for i in range(FLAGS.episodes):
     if i%FLAGS.save_steps == 0:
-	for agent in agents:
+        for agent in agents:
             agent.saveModel(folder, i)
        
     # Run episode
