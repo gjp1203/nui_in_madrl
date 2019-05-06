@@ -12,7 +12,7 @@ flags = tf.app.flags
 # Apprentice Firemen:
 # -ApprenticeFiremen_V{1,2}_C{INT}_{DET,PS,FS}_AP{1,2,3,4}
 flags.DEFINE_string('environment', 'ApprenticeFiremen_V1_C0_DET', 'Environment.') 
-flags.DEFINE_string('madrl', 'nui', 'Options: None, hysteretic, leniency and nui')
+flags.DEFINE_string('madrl', 'leniency', 'Options: None, hysteretic, leniency and nui')
 flags.DEFINE_string('format', 'NHWC', 'Format for conv (NHWC or NCHW)')
 flags.DEFINE_string('processor', '/gpu:0', 'GPU/CPU.')
 flags.DEFINE_integer('save_steps', 100, 'Save model every n steps..')
