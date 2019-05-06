@@ -1,8 +1,8 @@
 import sys
-from env.ApprenticeFiremen.tool import Tool
-from env.ApprenticeFiremen.fire_blanket import Fire_Blanket
-from env.ApprenticeFiremen.fire_exstinguisher import Fire_Exstinguisher
-from env.ApprenticeFiremen.charge import Charge
+from .tool import Tool
+from .fire_blanket import Fire_Blanket
+from .fire_exstinguisher import Fire_Exstinguisher
+from .charge import Charge
 import random
 
 class Fireman:
@@ -28,8 +28,8 @@ class Fireman:
         self.reward = 0
         self.x = x # x coordinate is set
         self.y = y # y coordinate is set
-	self.initial_x = x # Used for reset
-	self.initial_y = y # Used for reset
+        self.initial_x = x # Used for reset
+        self.initial_y = y # Used for reset
         self.fireman_id = fireman_id # Fireman id is set
         self.minReward = None
         self.initToolSteps() # Tool step counters are initialised
@@ -62,9 +62,9 @@ class Fireman:
         self.tool_steps[self.getToolName()] += 1
    
     def undoXY(self):
-	'''
+        '''
         Used to undo last step. 
-	'''
+        '''
         self.x = self._reset_x 
         self.y = self._reset_y
 
@@ -116,7 +116,7 @@ class Fireman:
         '''
         Method used to initialise tool step counter
         '''
-	self.tool_steps = {'itemless':0}
+        self.tool_steps = {'itemless':0}
         for item in self.tools:
             self.tool_steps.update({item:0})
      
@@ -150,29 +150,29 @@ class Fireman:
         each available tool has been carried.
         :return list of integers
         '''
-	return self.tool_steps
+        return self.tool_steps
 
     def resetXY(self):
         ''' 
 	Method used to reset agents x and y coordinates.
 	'''
-	self.x = self.initial_x
-	self.y = self.initial_y
+        self.x = self.initial_x
+        self.y = self.initial_y
 
     def putDownTool(self):
         '''
         Method used to delete tool held by the agent
         '''
-	if self.holdingTool():
-	    del self.tool
+        if self.holdingTool():
+            del self.tool
 
     def releaseItem(self):
         '''
         Method used to release tool:
         :return tool: Tool being released by the agent
         '''
-	tmpTool = self.tool
-	del self.tool
+        tmpTool = self.tool
+        del self.tool
         return tmpTool
 
     def holdingTool(self):
@@ -285,10 +285,10 @@ class Fireman:
         Method to get the name of the current tool 
         :return string: Name of tool held by the agent
         '''
-	if self.holdingTool():
+        if self.holdingTool():
             return self.tool.NAME
         else:
-	    return 'itemless'
+            return 'itemless'
 
     def getLastToolID(self):
         '''
@@ -301,8 +301,8 @@ class Fireman:
         '''
         Resets tool.
         '''
-	if self.holdingTool():
-	    del self.tool
+        if self.holdingTool():
+            del self.tool
 
     def reset(self):
         '''

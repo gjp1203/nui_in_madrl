@@ -30,11 +30,11 @@ class EnvConfigV3:
         self.CIVILIAN_SHIFT = 3
 
         # Fire coordinates
-	self.FIRE_X = [self.HMP]
-	self.FIRE_Y = [self.VMP]
+        self.FIRE_X = [self.HMP]
+        self.FIRE_Y = [self.VMP]
 
         self.FIRE_X = lambda: self.HMP
-	self.FIRE_Y = lambda: self.VMP
+        self.FIRE_Y = lambda: self.VMP
         if accesspoints == 1:
             self.OVERLAP_XY = (self.HMP,self.VMP+1)
    

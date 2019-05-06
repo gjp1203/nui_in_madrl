@@ -66,7 +66,7 @@ class EPISODIC_FIFO(object):
         # From each of the episodes a sequence is selected:
         if len(self.c.dim) == 3:
  	    # From each of the episodes a sequence is selected:
-	    for i in indexes:
+            for i in indexes:
                 samples.append(self._episodes[i][random.randint(0, len(self._episodes[i])-1)])
         else:
             for i in indexes:

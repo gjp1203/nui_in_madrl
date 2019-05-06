@@ -1,4 +1,4 @@
-from env.ApprenticeFiremen.tool import Tool
+from .tool import Tool
 import env.ApprenticeFiremen.colors
 class Fire_Blanket(Tool):
     """ Fire blanket tool """

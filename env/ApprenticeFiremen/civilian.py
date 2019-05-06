@@ -10,14 +10,14 @@ class Civilian:
         '''
         :param object: config
         '''
-	self.c = c
-        self.agent_colors = colors.AGENT_COLORS # Agents colors are set
+        self.c = c
+        self.agent_colors = env.ApprenticeFiremen.colors.AGENT_COLORS # Agents colors are set
         self.resetXY()
  
     def undoXY(self):
-	'''
+        '''
         Used to undo last step. 
-	'''
+        '''
         self.x = self._reset_x 
         self.y = self._reset_y
 
@@ -47,8 +47,8 @@ class Civilian:
 
     def resetXY(self):
         ''' 
-	Method used to reset agents x and y coordinates.
-	'''
+        Method used to reset agents x and y coordinates.
+        '''
         r = random.randrange(2)
         if r == 0:
             self.y = self.c.VMP-self.c.CIVILIAN_SHIFT # y coordinate is set
@@ -102,7 +102,7 @@ class Civilian:
 	:return self.y: y coordiantes of the agent
         :return self.heading: direction that the agent is facing
         '''
-	return self.x, self.y, self.heading
+        return self.x, self.y, self.heading
 
     def updateXY(self, x, y):
         '''

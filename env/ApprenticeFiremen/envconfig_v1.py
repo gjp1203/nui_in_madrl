@@ -32,7 +32,7 @@ class EnvConfigV1:
 
         # Fire coordinates
         self.FIRE_X = lambda: random.randrange(self.HMP-4, self.HMP+4, 2)
-	self.FIRE_Y = lambda: random.randrange(self.VMP-5, self.VMP+3, 2)
+        self.FIRE_Y = lambda: random.randrange(self.VMP-5, self.VMP+3, 2)
 
         """ Obstacles """
         self.OBSTACLES_YX = []
@@ -58,16 +58,6 @@ class EnvConfigV1:
             self.OBSTACLES_YX.append((i, self.GW-1))
             self.OBSTACLES_YX.append((i, self.GW-2))
 
-        """if accesspoints == 1:
-            self.OBSTACLES_YX.append((self.VMP-1, self.HMP))
-            self.OBSTACLES_YX.append((self.VMP, self.HMP-1))
-            self.OBSTACLES_YX.append((self.VMP, self.HMP+1))
-        elif accesspoints == 2:
-            self.OBSTACLES_YX.append((self.VMP+1, self.HMP))
-            self.OBSTACLES_YX.append((self.VMP-1, self.HMP))
-        elif accesspoints == 3:
-            self.OBSTACLES_YX.append((self.VMP-1, self.HMP))
-        """
         """ Tool Pickup Locations """
         self.PICKUP_LOCATIONS = [('charge', self.HMP+2,1),
                                  ('fire_blanket', self.HMP,1),

@@ -107,7 +107,7 @@ class Leniency(DQN):
         else:
             self._index_tp1 = self.replay_memory.getHashKey(reduced_observation)
 
-	self.replay_memory.add_experience([np.copy(self.current),\
+        self.replay_memory.add_experience([np.copy(self.current),\
                                            np.copy(new_state),\
                                            self.action,\
                                            reward,\

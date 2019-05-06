@@ -1,12 +1,15 @@
 from __future__ import print_function
 from scipy.misc import imsave 
 #from store import writeTo
-from sets import Set
 from math import exp
 import numpy as np
 import inspect
 import xxhash
 import time
+try:
+    set
+except NameError:
+    from sets import Set as set
 
 class Temperature:
 
@@ -68,7 +71,7 @@ class Temperature:
         '''
         Called to train hash key network
         '''
-	o_t, _, _, _, _, _, _, _, _ = self._replay_memory.getUnzippedSamples()
+        o_t, _, _, _, _, _, _, _, _ = self._replay_memory.getUnzippedSamples()
         if self.c.cnn.format == "NHWC":
             o_t = np.moveaxis(o_t, 1, -1)
         optDict = {self._net.inputs: o_t}

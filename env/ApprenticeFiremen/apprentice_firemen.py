@@ -1,13 +1,13 @@
-from env.ApprenticeFiremen.fire_exstinguisher import Fire_Exstinguisher
-from env.ApprenticeFiremen.fire_blanket import Fire_Blanket
+from .fire_exstinguisher import Fire_Exstinguisher
+from .fire_blanket import Fire_Blanket
 from matplotlib import pyplot as plt
-from env.ApprenticeFiremen.pickuparea import Pickuparea
-from env.ApprenticeFiremen.civilian import Civilian
+from .pickuparea import Pickuparea
+from .civilian import Civilian
 from scipy.misc import imsave 
-from env.ApprenticeFiremen.fireman import Fireman
+from .fireman import Fireman
 from config import Config
-from env.ApprenticeFiremen.charge import Charge
-from env.ApprenticeFiremen.fire import Fire
+from .charge import Charge
+from .fire import Fire
 import numpy as np
 import os.path
 import random
@@ -22,20 +22,20 @@ class ApprenticeFiremen(object):
         :param tf.flags: Settings
         '''
         if version == 1:
-            from envconfig_v1 import EnvConfigV1
+            from .envconfig_v1 import EnvConfigV1
             self.c = EnvConfigV1(civilians)
         if version == 2:
-            from envconfig_v2 import EnvConfigV2
+            from .envconfig_v2 import EnvConfigV2
             self.c = EnvConfigV2(civilians)
         if version == 3:
-            from envconfig_v3 import EnvConfigV3
+            from .envconfig_v3 import EnvConfigV3
             self.c = EnvConfigV3(civilians, accesspoints)
         if self.c.CHALLENGING_COLORS:
-            import hardcolors
-            self.colors = hardcolors
+            import env.ApprenticeFiremen.hardcolors
+            self.colors = env.ApprenticeFiremen.hardcolors
         else:
-            import colors
-            self.colors = colors
+            import env.ApprenticeFiremen.colors
+            self.colors = env.ApprenticeFiremen.colors
         self.accesspoints = accesspoints
         self.eval = 0
         self.episode_count = 0 
@@ -228,7 +228,7 @@ class ApprenticeFiremen(object):
         self.fires = {}
         xlist = []
         ylist = []
-        for i in range(len(self.firemen)/2):
+        for i in range(len(self.firemen)//2):
             if self.c.FIRE_X == None and self.c.FIRE_Y == None:
                 while True:
                     x = random.randrange(self.c.HMP-4, self.c.HMP+4, 2)
@@ -633,7 +633,7 @@ class ApprenticeFiremen(object):
                     else:
                         facingDict.update({key:[i]})
 
-        for key, agentIDs in facingDict.iteritems():
+        for key, agentIDs in facingDict.items():
             if key in self.fires and self.fires[key].getTemperature() > 0.0:
                 for i in agentIDs[:2]:
                     self.firemen[i].setFacingFire()

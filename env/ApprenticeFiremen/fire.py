@@ -1,4 +1,4 @@
-from rewards import Rewards
+from .rewards import Rewards
 class Fire:
     """ Can be used to create fire instance at a specified x, y coordinate """
 
@@ -10,8 +10,8 @@ class Fire:
         :param vector: RGB color code for fire
         '''
         self.x = x
-	self.y = y
-	self.ignite()
+        self.y = y
+        self.ignite()
         self.rewards = Rewards(rewardMode)
         self.color = color
 
@@ -19,7 +19,7 @@ class Fire:
         '''
         Sets temperature to max value
         '''
-	self.temperature = 1.0
+        self.temperature = 1.0
 
     def getXY(self):
         '''
@@ -32,19 +32,19 @@ class Fire:
         '''
         Used to reset fire temperatures
         '''
-	self.temperature = 1.0
+        self.temperature = 1.0
 
     def getTemperature(self):
         '''
         :return float: Fire temperature
         '''
-	return self.temperature
+        return self.temperature
 
     def getStatus(self):
         '''
         :return float indicating if fire is on or off
         '''
-	return 1.0 if self.temperature == 1.0 else 0.0
+        return 1.0 if self.temperature == 1.0 else 0.0
 
     def coolDown(self, tools):
         '''

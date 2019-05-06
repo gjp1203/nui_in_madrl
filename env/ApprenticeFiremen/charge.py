@@ -1,4 +1,4 @@
-from env.ApprenticeFiremen.tool import Tool
+from .tool import Tool
 class Charge(Tool):
     """ Charge charge tool """
     NAME = 'charge'

@@ -6,12 +6,12 @@ class EnvConfigV3:
         """ Gridworld Dimensions """
         self.GRID_HEIGHT = 16
         self.GRID_WIDTH = 16
-        self.MID = self.GRID_WIDTH / 2
+        self.MID = self.GRID_WIDTH // 2
         self.GH = self.GRID_HEIGHT
         self.GW = self.GRID_WIDTH
         self.DIM = [self.GH, self.GW]
-        self.HMP = int(self.GW/2) # HMP = Horizontal Mid Point
-        self.VMP = int(self.GH/2) # VMP = Vertical Mid Point
+        self.HMP = int(self.GW//2) # HMP = Horizontal Mid Point
+        self.VMP = int(self.GH//2) # VMP = Vertical Mid Point
         self.ACTIONS = 5 # No-op, move up, down, left, righ
 
         """ Wind (slippery surface) """
