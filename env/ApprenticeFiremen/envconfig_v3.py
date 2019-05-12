@@ -75,7 +75,8 @@ class EnvConfigV3:
         self.AHEAD_VIEW = 6
         self.SIDE_VIEW = 6
         self.DIM = [self.AHEAD_VIEW+self.AHEAD_VIEW+1,\
-                    self.SIDE_VIEW+self.SIDE_VIEW+1]
+                    self.SIDE_VIEW+self.SIDE_VIEW+1,
+                    self.CHANNELS]
         self.OFFSET = self.AHEAD_VIEW
 
 
