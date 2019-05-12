@@ -1,4 +1,4 @@
-from episodic_fifo import EPISODIC_FIFO
+from .episodic_fifo import EPISODIC_FIFO
 from madrl.nui.nui import NUI
 from collections import deque
 from random import randint
@@ -69,9 +69,9 @@ class NUI_ERM(EPISODIC_FIFO):
                 self.__ERMs[key].append(ep)
 
     def getSize(self):
-	''' 
-	Returns the number of transitions currently stored inside the list. 
-	'''
+        ''' 
+        Returns the number of transitions currently stored inside the list. 
+        '''
         count = 0
         for i in range(self.c.meta_actions):
             count += len(self.__ERMs[i]) 
@@ -79,12 +79,12 @@ class NUI_ERM(EPISODIC_FIFO):
 
     def add_experience(self, t):
         ''' 
-	Method used to add state transitions to the 
+        Method used to add state transitions to the 
         replay memory. 
-	:param t(ransition): Tuple containing state transition tuple
-	'''
-	# Add transition to episode list:
-	self.addStateTransition(t)
+        :param t(ransition): Tuple containing state transition tuple
+        '''
+        # Add transition to episode list:
+        self.addStateTransition(t)
         if t[4] == 1: # If the transition is terminal
             if self.aboveThreshold():
                 self.__intervals.decayLowerBound(t[5], t[3])     
