@@ -77,12 +77,12 @@ class NUI_DQN(DQN):
                 self.replay_memory.clearEpisode()
                 clear = True
         if clear == False:
-	    self.replay_memory.add_experience([np.copy(self.current),\
-                                                np.copy(new_state),\
-                                                self.action,\
-                                                reward,\
-                                                terminal,\
-						meta_action])
+            self.replay_memory.add_experience([np.copy(self.current),\
+                                               np.copy(new_state),\
+                                               self.action,\
+                                               reward,\
+                                               terminal,\
+                                               meta_action])
 
     def feedback(self, reward, terminal, new_state, meta_action=None):
         '''

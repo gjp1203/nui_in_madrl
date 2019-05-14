@@ -25,12 +25,12 @@ class Agent(object):
            import madrl.hysteretic.hql
            DRL = madrl.hysteretic.hql.HQL_FACTORY(parent=base) 
         elif self.c.madrl == 'leniency': 
-           if self.c.drl is not 'dqn':
+           if self.c.drl != 'dqn':
                raise ValueError('Leniency can currently only use dqn as base.')
            else:
                from madrl.leniency.leniency import Leniency as DRL
         elif self.c.madrl == 'nui': 
-           if self.c.drl is not 'dqn':
+           if self.c.drl != 'dqn':
                raise ValueError('NUI can currently only use dqn as base.')
            else:
                from madrl.nui.nui_dqn import NUI_DQN as DRL

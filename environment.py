@@ -29,7 +29,7 @@ class Environment(object):
                 self.__env = CMOTP(version)
                 
             else:
-                raise ValueError('Invalid environment string format for ApprenticeFiremen')
+                raise ValueError('Invalid environment string format for CMOTP')
         else:
             from env.openai_gym.openai_gym import OpenAI_Gym
             self.__env = OpenAI_Gym(flags)

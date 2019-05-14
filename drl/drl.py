@@ -89,7 +89,7 @@ class DRL(object):
         Used to initialise parameters
         '''
         config = tf.ConfigProto(allow_soft_placement=True, log_device_placement=False,\
-			        gpu_options=tf.GPUOptions(allow_growth=True))
+                                gpu_options=tf.GPUOptions(allow_growth=True))
         self.sess = tf.Session(graph=self.g, config=config)
         self.sess.run(tf.variables_initializer(set(tf.global_variables())))
 
@@ -112,7 +112,7 @@ class DRL(object):
                 for t, c in zip(tn_vars, cn_vars):
                     assigns.append(t.assign(c.value()))
                     incAssigns.append(t.assign(tf.multiply(c.value(), self.c.tau)\
-				   + tf.multiply(t.value(), 1. - self.c.tau))) 
+                                   + tf.multiply(t.value(), 1. - self.c.tau))) 
                 self.syncNetworks = tf.group(*assigns)
                 self.incSyncNetworks = tf.group(*incAssigns)
 
